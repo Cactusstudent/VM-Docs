@@ -77,8 +77,6 @@
 ##### 发布与检查机制
 
 - 当有译文更改时，工作流会自动发布一个 **预发布 Release** 供测试。
-  - **发现错误**：在 Release 说明页面提示，并上传 HTML 报告至 **Artifacts** 和 **Release 页面**。
-  - **未发现错误**：工作流详情页会提示找不到报告文件，此属正常情况，无需担心。
 
 >⚠️ 注意：
 > - **GitHub → Paratranz** 的同步任务使用频率较低，仅支持手动触发。
@@ -234,20 +232,6 @@ resourcepacks/vm_translations/assets/quests/lang/en_us/
 
 - **工作流文件**：`.github/workflows/check_update.yml`
 - **触发方式**：默认在北京时间（UTC+8） **每天早上 6 点左右** 自动运行，也支持在 Actions 页面手动触发。
-
-##### 自动化流程
-
-1. 工作流按计划或手动启动。
-2. 脚本根据 `modpack.json` 的配置，检查 CurseForge 是否有新版本发布。
-3. **如果检测到新版本**：
-     - 下载新旧两个版本的整合包存档。
-     - 对比 `overrides` 目录中的文件差异。
-     - 将文件的 **新增、修改、删除** 应用到 `sourceDir` 目录。
-     - 更新 `infoFilePath` 中的 `modpack.version` 和 `modpack.translation.version`，两者保持一致。
-     - 创建一个新的分支，并提交所有变更。
-     - **自动创建一个PR**，其中包含清晰的变更摘要。
-     - 生成一份详细的 HTML 差异报告，并将其链接评论到该 PR 中，供人工审查。
-4. **如果未检测到新版本**，工作流正常结束，不执行任何操作。
 
 ### Paratranz 术语管理和标记规则
 
